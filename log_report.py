@@ -31,7 +31,7 @@ def most_viewed_articles():
 		SELECT articles.title, COUNT(*) AS views
 		FROM articles
 		JOIN log
-		ON log.path LIKE CONCAT('%',articles.slug,'%')
+		ON log.path = '/article/' || articles.slug
 		WHERE log.status ='200 OK'
 		GROUP BY articles.title ORDER BY views DESC LIMIT 3;
 	"""
@@ -39,17 +39,18 @@ def most_viewed_articles():
 
 	print("Most viewed articles:")
 	for result in results:
-		print result[0] + " - " + str(result[1]) + " views"
+		print '{article} - {count} views'.format(article=result[0], count=result[1])
+
 
 
 # Function to find the three most viewed authors
 def most_viewed_authors():
 	"""Create query string, connect to the database and parse results"""
 	query = """
-	    SELECT authors.name, COUNT(*) AS views
+		SELECT authors.name, COUNT(*) AS views
 		FROM articles
  		JOIN log
- 		ON log.path LIKE CONCAT('%',articles.slug,'%')
+ 		ON log.path = '/article/' || articles.slug
 		JOIN authors
 		ON authors.id = articles.author
 		WHERE log.status ='200 OK'
@@ -60,7 +61,8 @@ def most_viewed_authors():
 
 	print("Most viewed authors:")
 	for result in results:
-		print result[0] + " - " + str(result[1]) + " views"
+		print '{author} - {count} views'.format(author=result[0], count=result[1])
+
 
 
 # Function to find the days with more than 1% errors on user requests
@@ -80,7 +82,8 @@ def find_error_days():
 
 	print("Days with more than 1% errors")
 	for result in results:
-		print result[0].strftime('%B %d, %Y') + " - " + str(result[1]) + "% errors"
+		print '{date} - {errors} % errors'.format(date=result[0].strftime('%B %d, %Y'), errors=result[1])
+
 
 # Run all query functions
 if __name__ == '__main__':
