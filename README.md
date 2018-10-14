@@ -73,7 +73,7 @@ news=> create view error_requests as select date_trunc('day', time) "day", count
 
 ## To run the script:
 
-1.
+1. Run file with python
 ```
 $ python logs_report.py
 ```
