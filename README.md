@@ -17,7 +17,7 @@ This python script tool will connect to and read from the provided news database
 * [Vagrant](https://www.vagrantup.com/downloads.html) - A tool for working with virtual environments
 * [git](https://git-scm.com/downloads) - A version control tool
 
-## Setup and Configuration:
+## Setup and configuration:
 
 1. Install Vagrant.
 2. Install VirtualBox.
@@ -34,12 +34,13 @@ $ cd fullstack-nanodegree-vm/vagrant/
 ```
 $ git clone https://github.com/neagkv/Logs_Analysis.git
 ```
-6. Start up the virtual machine.
+6. Start up the virtual machine. Note this may take several minutes.
 ```
 $ vagrant up
 ```
 7. log into the virtual machine.
 ```
+
 $ vagrant ssh
 ```
 8. cd into the Logs_Analysis directory.
@@ -70,12 +71,14 @@ news=> create view all_requests as select date_trunc('day', time) "day", count(*
 news=> create view error_requests as select date_trunc('day', time) "day", count(*) as bad from log where status != '200 OK' group by day order by day;
 ```
 
-## To Run the Script:
+## To run the script:
 
+1.
 ```
 $ python logs_report.py
 ```
 
+2. compare output with output.txt
 
 
 

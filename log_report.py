@@ -46,7 +46,7 @@ def most_viewed_articles():
 def most_viewed_authors():
 	"""Create query string, connect to the database and parse results"""
 	query = """
-		SELECT authors.name, COUNT(*) AS views
+	    SELECT authors.name, COUNT(*) AS views
 		FROM articles
  		JOIN log
  		ON log.path LIKE CONCAT('%',articles.slug,'%')
@@ -73,7 +73,7 @@ def find_error_days():
 		FROM all_requests
 		JOIN error_requests
 		ON all_requests.day = error_requests.day
-		WHERE round((error_requests.bad * 1000)/all_requests.good) > 10
+		WHERE ROUND((error_requests.bad * 1000)/all_requests.good) > 10
 	"""
 
 	results = psql_connection(query)
